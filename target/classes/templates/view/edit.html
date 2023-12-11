@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>データベースのCRUD操作をしてみよう</title>
+<link rel="stylesheet" th:href="@{css/reset.css}" type="text/css">
+<link rel="stylesheet" th:href="@{css/sample003.css}" type="text/css">
+</head>
+<body>
+	<nav class="nav-container nav-color">
+		<p>編集画面</p>
+	</nav>
+	<div class="content-container">
+		<div class="content-wrap">
+			<form class="form-wrap" th:action="@{/update}" method="POST">
+				<div class="space-padding text-center">
+					<span class="content-text">textDataの値を変更後、更新ボタンをクリックしてレコードの値が変わっていることを確認しよう。</span>
+				</div>
+				<div class="edit-wrap space-padding">
+					<div class="padding-right">
+						<span >id:[[${inputTextDatasBean.id}]]</span>
+					</div>
+					<div>
+						<input class="text-form" type="text" name="textData" th:value=${inputTextDatasBean.textData}>
+						<input type="hidden" name="id" th:value=${inputTextDatasBean.id}>
+					</div>
+				</div>
+				<div class="space-padding">
+					<input type="submit" class="button-form" value="更新"/>
+					<a th:href="@{/index}" class="button-delete-form">戻る</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

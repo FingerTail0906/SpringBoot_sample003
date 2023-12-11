@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>データベースのCRUD操作をしてみよう</title>
+<link rel="stylesheet" th:href="@{css/reset.css}" type="text/css">
+<link rel="stylesheet" th:href="@{css/sample003.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+<script th:src="@{javascript/sample003.js}" defer="defer"></script>
+</head>
+<body>
+	<nav class="nav-container nav-color">
+		<p>SpringBootSample003(データベースのCRUD操作をしてみよう。)</p>
+	</nav>
+	<div class="content-container">
+		<div class="content-wrap">
+
+			<div class="space-padding text-center">
+				<span class="content-text">以下の各ボタンをクリックし<br>データベースの値の更新や登録をしてみよう。</span>
+			</div>
+			
+			<!-- 各画面表示ボタン  -->
+			<input id="save-wrap" type="button" class="button-form space-margin" value="新規登録項目の表示" onclick="insertBtnClick()">
+			<input id="db-display-btn-wrap" type="button" class="button-form space-margin d-none" value="登録内容の表示" onclick="editBtnClick()">
+			
+			<!-- 登録画面  -->
+			<form id="save-input-wrap" th:action="@{/save}" method="POST" class="d-none">
+				<table>
+					<thead>
+						<th>input_text</th>
+						<th></th>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" name="textData"></td>
+							<td><button type="submit" class="button-form">登録</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+			
+			<!-- 更新画面  -->
+			<div class="space-padding" id="update-wrap" >
+				<div class="table-title-wrap"><span class="table-title">現在のinput_text_datasテーブルのデータ</span></div>
+				<table>
+					<thead>
+						<th>id</th>
+						<th>input_text</th>
+						<th>編集</th>
+					</thead>
+					<tbody>
+						<tr th:each="inputTextDatasBean : ${listInputTextDatasBean}">
+							<td th:text=${inputTextDatasBean.id}></td>
+							<td th:text=${inputTextDatasBean.textData}></td>
+							<td>
+								<a th:href="@{/edit(id=${inputTextDatasBean.id})}" class="button-edit-form">編集</a>
+								<button type="submit" name="id" class="button-delete-form" th:value=${inputTextDatasBean.id} form="delete-form">削除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<form id="delete-form"  th:action="@{/delete}" method="POST"></form>
+			</div>
+			
+		</div>
+	</div>
+
+</body>
+</html>
